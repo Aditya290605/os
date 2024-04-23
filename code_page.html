@@ -1,0 +1,51 @@
+<!-- code_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Snippet Page</title>
+</head>
+<body>
+    <h1>Code Snippet Page</h1>
+    <button id="copyBtn">Copy Code</button>
+    <pre id="codeSnippet"></pre>
+    
+    <script>
+        // Get the snippet parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const snippet = urlParams.get('snippet');
+
+        // Define code snippets
+        const codeSnippets = {
+            fifo: `#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // FIFO code here
+    return 0;
+}`,
+            lru: `#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    // LRU code here
+    return 0;
+}`
+            // Add more snippets as needed
+        };
+
+        // Display the code snippet
+        document.getElementById('codeSnippet').innerText = codeSnippets[snippet];
+
+        // Add event listener to copy button
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const codeToCopy = document.getElementById('codeSnippet').innerText;
+            navigator.clipboard.writeText(codeToCopy)
+                .then(() => alert('Code copied to clipboard!'))
+                .catch(err => console.error('Could not copy code: ', err));
+        });
+    </script>
+</body>
+</html>
+
